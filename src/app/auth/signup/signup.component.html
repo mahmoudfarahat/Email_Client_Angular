@@ -1,0 +1,26 @@
+
+
+<h3>Create an Account</h3>
+<form   class="ui form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+
+  <div class="field">
+
+    <app-input [name]="authForm.controls.username" [labelTitle]="'Username'"></app-input>
+
+  </div>
+ <div class="field">
+
+    <app-input [name]="authForm.controls.password" [labelTitle]="'Password'"></app-input>
+
+  </div>
+  <div class="field">
+
+    <app-input [name]="authForm.get('passwordConfirmation')" [labelTitle]="'Password Confirmation'"></app-input>
+
+  </div>
+
+  <button class="ui submit button primary" type="submit">Submit</button>
+</form>
+
+
+{{authForm.errors | json}}
