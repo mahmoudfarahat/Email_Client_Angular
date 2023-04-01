@@ -1,4 +1,4 @@
-import { MatchPassword } from './../validators/match-password';
+import {  MatchPassword } from './../validators/match-password';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -18,10 +18,11 @@ authForm = new FormGroup({
 password:new FormControl('' ,[Validators.required , Validators.minLength(4),Validators.maxLength(20)]),
 passwordConfirmation: new FormControl('', [Validators.required ,Validators.minLength(4),Validators.maxLength(20)])
 },
+MatchPassword
 //  {validators:[this.matchPassword.validate]}
 
  )
-  constructor(private matchPassword:MatchPassword) { }
+  constructor( ) { }
 
   ngOnInit(): void {
   }
