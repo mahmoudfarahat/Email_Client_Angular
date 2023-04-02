@@ -23,8 +23,12 @@ export class AsyncUnique implements AsyncValidator{
             return null
           }),
           catchError((err)=>{
-            console.log(err.error)
-            return of({nonUniqueUsername:true})
+            if(err.error.username){
+              return of({nonUniqueUsername:true})
+            }else{
+              return of({noConnection:true})
+
+            }
         })
         )
 
