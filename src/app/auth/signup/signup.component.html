@@ -6,7 +6,7 @@
   <div class="field">
 
     <app-input [name]="authForm.controls.username" [labelTitle]="'Username'"></app-input>
-
+      <div >{{authForm.get('username')?.errors | json}}</div>
   </div>
  <div class="field">
 
