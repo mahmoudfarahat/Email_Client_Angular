@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { AsyncUnique } from './../validators/async-unique';
  import {  MatchPassword } from './../validators/match-password';
 import { Component, OnInit } from '@angular/core';
@@ -26,12 +27,18 @@ passwordConfirmation: new FormControl('', [Validators.required ,Validators.minLe
  {validators:[this.matchPassword.validate]}
 
  )
-  constructor(private matchPassword:MatchPassword , private asyncUnique:AsyncUnique ) { }
+  constructor(private matchPassword:MatchPassword , private asyncUnique:AsyncUnique  , private authservice:AuthService) { }
 
   ngOnInit(): void {
   }
   onSubmit(){
-    console.log(this.authForm.value)
+    if(this.authForm.invalid){
+      return;
+    }
+    this.authservice.signup(this.authForm.value).subscribe((response)=>{
+      console.log(response)
+    })
+
   }
 
 }

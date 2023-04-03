@@ -10,7 +10,7 @@ validate(control: AbstractControl): ValidationErrors | null {
   if (control instanceof FormGroup) {
     const {password ,passwordConfirmation } = control.value
     // console.log(password ,passwordConfirmation )
-    return password === passwordConfirmation ? null : { passwordMismatch: true };
+    return password === passwordConfirmation ? null : { passwordMisMatch: true };
   }
   return null;
 
