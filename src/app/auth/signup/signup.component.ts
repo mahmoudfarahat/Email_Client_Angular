@@ -14,7 +14,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  authForm :FormGroup | any
+
   constructor(private matchPassword:MatchPassword , private asyncUnique:AsyncUnique  , private authservice:AuthService) {
 
    }
@@ -22,24 +22,40 @@ export class SignupComponent implements OnInit {
 
 
   ngOnInit(): void {
-      this.authForm = new FormGroup({
-      username:new FormControl('', [Validators.required ,Validators.minLength(3),Validators.maxLength(20), Validators.pattern(/^[a-z0-9]+$/)],
-          [this.asyncUnique.validate]
-         ),
-      password:new FormControl('' ,[Validators.required , Validators.minLength(4),Validators.maxLength(20)]),
-      passwordConfirmation: new FormControl('', [Validators.required ,Validators.minLength(4),Validators.maxLength(20)])
-      },
-      // MatchPassword
-       {validators:[this.matchPassword.validate]}
-       )
+
+
   }
+  authForm :FormGroup= new FormGroup({
+    username:new FormControl('', [Validators.required ,Validators.minLength(3),Validators.maxLength(20), Validators.pattern(/^[a-z0-9]+$/)],
+        [this.asyncUnique.validate]
+       ),
+    password:new FormControl('' ,[Validators.required , Validators.minLength(4),Validators.maxLength(20)]),
+    passwordConfirmation: new FormControl('', [Validators.required ,Validators.minLength(4),Validators.maxLength(20)])
+    },
+    // MatchPassword
+     {validators:[this.matchPassword.validate]}
+     )
   onSubmit(){
 
     if(this.authForm.invalid){
       return;
     }
-    this.authservice.signup(this.authForm.value).subscribe((response)=>{
-      console.log(response)
+    this.authservice.signup(this.authForm.value)
+    .subscribe({
+      next:(response) =>{
+          // console.log(this)
+      },
+      // complete(){},
+      error:(err) =>{
+        console.log(err)
+        if(!err.status){
+            this.authForm.setErrors({noConnection :true})
+        }else{
+          this.authForm.setErrors({unKnownError :true})
+
+        }
+
+      }
     })
 
   }

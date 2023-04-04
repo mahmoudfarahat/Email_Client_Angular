@@ -5,12 +5,12 @@
 
   <div class="field">
 
-    <app-input [control]="authForm.controls.username" [label]="'Username'"></app-input>
+    <app-input [control]="authForm.controls['username']" [label]="'Username'"></app-input>
 
   </div>
  <div class="field">
 
-    <app-input [control]="authForm.controls.password" [label]="'Password'" type="password"></app-input>
+    <app-input [control]="authForm.controls['password']" [label]="'Password'" type="password"></app-input>
 
   </div>
   <div class="field">
@@ -26,9 +26,16 @@
 
   " class="ui red basic label">
     <p *ngIf="authForm.errors?.['passwordMisMatch']">
- Password and Password Confirmation must match
+      Password and Password Confirmation must match
 
     </p>
+    unKnownError
+    <p *ngIf="authForm.errors['noConnection']">
+        No internet connection detected, failed to sign up
+    </p>
+    <p *ngIf="authForm.errors['unKnownError']">
+      Failed to sign up
+  </p>
   </div>
   <div>
   <button class="ui submit button primary" type="submit">Submit</button>
@@ -37,4 +44,4 @@
 </form>
 
 
-<!-- {{authForm.errors | json}} -->
+{{authForm.errors | json}}
