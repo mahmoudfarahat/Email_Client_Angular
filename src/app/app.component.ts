@@ -19,6 +19,7 @@ signedin$ :BehaviorSubject<boolean>
 
   ngOnInit(){
     this.authService.checkAuth().subscribe(() =>{})
+    
 // this.authService.signedin$.subscribe((signedin) =>{
 //   this.signedin= signedin
 // })

@@ -1,1 +1,27 @@
-<p>signin works!</p>
+
+<h3>Sign In</h3>
+ <form class="ui form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+
+  <div class="field">
+
+    <app-input [control]="authForm.controls['username']" [label]="'Username'"></app-input>
+
+  </div>
+ <div class="field">
+
+    <app-input [control]="authForm.controls['password']" [label]="'Password'" type="password"></app-input>
+
+  </div>
+
+<div *ngIf="authForm.errors" class="ui red basic label">
+  <p *ngIf="authForm.errors['credentials']">
+    Invaliad username or password
+  </p>
+</div>
+
+  <div>
+    <button class="ui submit button primary" type="submit">Submit</button>
+
+    </div>
+
+ </form>

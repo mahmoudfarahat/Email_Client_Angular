@@ -12,11 +12,17 @@ username:string
 password:string
 passwordConfirmation:string
 }
-
+interface signInCredentials{
+  username:string
+password:string
+}
 interface signupResponse{
 
 }
-
+interface SignedinResponse {
+  authenticated: boolean;
+  username:string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +41,7 @@ signedin$ = new BehaviorSubject(false);
 
 
   signup(credentials :signupcredentials){
-    return this.http.post<signupResponse>(`${this.rootUrl}/auth/signup`,credentials ,{
-      withCredentials:true
-    }).pipe(
+    return this.http.post<signupResponse>(`${this.rootUrl}/auth/signup`,credentials  ).pipe(
       tap(() =>{
           this.signedin$.next(true)
       })
@@ -46,15 +50,30 @@ signedin$ = new BehaviorSubject(false);
 
 
   checkAuth(){
-    return this.http.get(`${this.rootUrl}/auth/signedin`,{
-      withCredentials:true
-    })
+    return this.http.get<SignedinResponse>(`${this.rootUrl}/auth/signedin`, )
     .pipe(
-      tap((response)=>{
-        console.log(response)
+      tap(({authenticated})=>{
+        console.log(authenticated)
+        this.signedin$.next(authenticated)
       })
     )
   }
 
+  signout(){
+    return this.http.post(`${this.rootUrl}/auth/signout`,{} )
+        .pipe(
+          tap(()=>{
+            this.signedin$.next(false)
+          })
+        )
+  }
+
+  sigin(credentials:signInCredentials){
+    return this.http.post(`${this.rootUrl}/auth/signin`,credentials  ).pipe(
+      tap(() =>{
+          this.signedin$.next(true)
+      })
+    )
+  }
 
 }
