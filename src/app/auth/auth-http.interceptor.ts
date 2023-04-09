@@ -19,7 +19,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     withCredentials :true
    })
 
-   console.log(modifiedReq)
+  //  console.log(modifiedReq)
 
     return next.handle(modifiedReq)
         // .pipe(
