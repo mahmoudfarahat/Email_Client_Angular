@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-inbox-home',
@@ -11,5 +11,5 @@ export class InboxHomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+ 
 }
