@@ -11,6 +11,8 @@ export class InputComponent implements OnInit {
  @Input() control: FormControl | any
  @Input()  label =''
  @Input() type='text'
+@Input() controlType = 'input'
+
    constructor() { }
 
   ngOnInit(): void {
