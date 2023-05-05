@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Email } from '../email';
+import { FormControl, FormGroup, Validators  } from '@angular/forms';
 
 @Component({
   selector: 'app-email-form',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmailFormComponent implements OnInit {
 
+  emailForm! : FormGroup
+  @Input() email!:Email
+
   constructor() { }
 
   ngOnInit(): void {
+    const {subject,from,to,text} = this.email
+
+    this.emailForm = new FormGroup({
+      to:new FormControl(to, [Validators.required,Validators.email]),
+      from:new FormControl({value:from,disabled:true}),
+      subject:new FormControl(subject,[Validators.required]),
+      content:new FormControl(text,[Validators.required]),
+    })
+
   }
 
 }

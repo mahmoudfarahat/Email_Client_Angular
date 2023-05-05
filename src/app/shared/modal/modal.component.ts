@@ -20,4 +20,5 @@ export class ModalComponent implements OnInit {
   onDismissClick(){
     this.dismiss.emit()
   }
+  
 }

@@ -7,5 +7,5 @@ class="ui button inverted primary fluid"
 <app-modal (dismiss)="showModal = false" *ngIf="showModal">
 
   <h3 modalTitle>Compose</h3>
- <app-email-form></app-email-form>
+ <app-email-form [email]="email"></app-email-form>
 </app-modal>

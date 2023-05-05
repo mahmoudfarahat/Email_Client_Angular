@@ -1,1 +1,23 @@
-<p>email-form works!</p>
+
+<form   class="ui form" [formGroup] ="emailForm" >
+
+   <div class="field">
+    <app-input [control]="this.emailForm.get('to')" label="To" type="email" ></app-input>
+   </div>
+
+  <div class="field">
+  <app-input [control]="this.emailForm.get('from')" label="from" type="email" ></app-input>
+  </div>
+
+<div class="field">
+<app-input [control]="this.emailForm.get('subject')" label="subject"></app-input>
+</div>
+
+<div class="field">
+ <app-input [control]="this.emailForm.get('content')" label="content"></app-input>
+</div>
+
+
+<button class="ui button primary">Send</button>
+
+</form>
